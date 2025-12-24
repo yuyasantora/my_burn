@@ -1,7 +1,7 @@
 use burn::data::dataset::vision::ImageFolderDataset;
 use std::path::Path;
 
-const DATASET_PATH: &str = "./food-101/food-101/images";
+const DATASET_PATH: &str = "C:/Users/yuya.oohara/Desktop/AI/burn/my_food101/food-101/food-101/images";
 
 // train/testの読み込み
 pub trait Food101Loader {

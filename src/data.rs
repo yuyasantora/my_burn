@@ -5,6 +5,7 @@ use burn::{
     },
     prelude::*,
 };
+use image::{imageops::FilterType, RgbImage};
 
 pub const IMAGE_SIZE: usize = 64;
 
@@ -30,7 +31,25 @@ impl<B: Backend> Batcher<B, ImageDatasetItem, Food101Batch<B>> for Food101Batche
                     })
                     .collect();
 
-                let data = TensorData::new(pixels, [item.image_height, item.image_width, 3]);
+                // RgbImageを作成
+                let img = RgbImage::from_raw(
+                    item.image_width as u32,
+                    item.image_height as u32,
+                    pixels,
+                ).expect("Failed to create image");
+
+                // 64x64にリサイズ
+                let resized = image::imageops::resize(
+                    &img,
+                    IMAGE_SIZE as u32,
+                    IMAGE_SIZE as u32,
+                    FilterType::Triangle,
+                );
+
+                // リサイズ後のピクセルデータ
+                let resized_pixels: Vec<u8> = resized.into_raw();
+
+                let data = TensorData::new(resized_pixels, [IMAGE_SIZE, IMAGE_SIZE, 3]);
                 data.convert::<B::FloatElem>()
             })
             .map(|data| Tensor::<B, 3>::from_data(data, device))
