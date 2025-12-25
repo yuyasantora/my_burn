@@ -12,7 +12,7 @@ use burn::{
     record::CompactRecorder,
     tensor::backend::AutodiffBackend,
     train::{
-        metric::{AccuracyMetric, LossMetric},
+        metric::AccuracyMetric,
         ClassificationOutput, LearnerBuilder, TrainOutput, TrainStep, ValidStep
     }
 };

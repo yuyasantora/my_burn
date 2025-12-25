@@ -1,7 +1,7 @@
 use burn::{nn::{
     conv::{Conv2d,Conv2dConfig},
     pool::{AdaptiveAvgPool2d, AdaptiveAvgPool2dConfig},
-    Dropout, DropoutConfig, Linear, LinearConfig, Relu,PaddingConfig2d
+    Dropout, DropoutConfig, Linear, LinearConfig, Relu
 }, prelude::*};
 
 #[derive(Module, Debug)]
@@ -42,7 +42,7 @@ impl ModelConfig {
 
 impl<B: Backend> Model<B> {
     pub fn forward(&self, images: Tensor<B, 4>) -> Tensor<B, 2> {
-        let [batch_size, _ ,height, width] = images.dims();
+        let [batch_size, _, _, _] = images.dims();
 
         let x = self.conv1.forward(images);
         let x = self.dropout.forward(x);

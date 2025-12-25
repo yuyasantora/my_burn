@@ -2,7 +2,7 @@ mod model;
 mod data;
 mod dataset;
 mod training;
-
+mod config;
 use crate::{model::ModelConfig, training::TrainingConfig};
 use burn::{
     backend::{Autodiff, Wgpu},
