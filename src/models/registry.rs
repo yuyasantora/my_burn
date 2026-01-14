@@ -1,9 +1,5 @@
-use crate::{
-    config::ModelConfigYaml,
-    models::simple_cnn::{SimpleCnn, SimpleCnnConfig},
-};
-use burn::prelude::*;
-
+use crate::config::{ModelConfigYaml, ModelType};
+use crate::models::simple_cnn::{SimpleCnn, SimpleCnnConfig};
 use burn::prelude::*;
 
 pub fn create_model<B: Backend>(
